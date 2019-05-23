@@ -34,6 +34,7 @@ jobs:
           name: Linting and Coverage
           command: |
             . venv/bin/activate
+            cd backend
             flake8
             pytest --cov --junitxml=test-reports/junit.xml
       - store_artifacts:
