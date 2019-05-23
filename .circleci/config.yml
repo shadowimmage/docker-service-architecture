@@ -43,7 +43,7 @@ jobs:
           name: Linting test
           command: |
             pwd
-            ls -la
+            ls -lah
             # cd project
             . .venv/bin/activate
             cd backend
@@ -52,7 +52,7 @@ jobs:
           name: coverage test
           command: |
             pwd
-            ls -la
+            ls -lah
             # cd project
             . .venv/bin/activate
             cd backend
