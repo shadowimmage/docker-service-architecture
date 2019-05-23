@@ -42,14 +42,26 @@ jobs:
       - run:
           name: Linting test
           command: |
+<<<<<<< HEAD
             cd project
+=======
+            pwd
+            ls -lah
+            # cd project
+>>>>>>> feature-django
             . .venv/bin/activate
             cd backend
             flake8
       - run:
           name: coverage test
           command: |
+<<<<<<< HEAD
             cd project
+=======
+            pwd
+            ls -lah
+            # cd project
+>>>>>>> feature-django
             . .venv/bin/activate
             cd backend
             pytest
