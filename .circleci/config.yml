@@ -2,16 +2,17 @@ version: 2.1
 # CircleCI
 jobs:
   lint_test_coverage:
+    working_directory: ~/project # this is the default
     docker:
     # The first image listed is the primary image and runs all commands
       - image: circleci/python:3.6
         environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test?sslmode=disable
           DJANGO_SETTINGS_MODULE: backend.settings-circleci
     # Subsequent images listed run on a common network with the primary image
       - image: circleci/postgres:9.6.9
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
     steps:
@@ -39,12 +40,19 @@ jobs:
           name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          name: Linting and Coverage
+          name: Linting test
           command: |
+            cd project
             . .venv/bin/activate
             cd backend
             flake8
-            pytest --cov --junitxml=test-reports/junit.xml
+      - run:
+          name: coverage test
+          command: |
+            cd project
+            . .venv/bin/activate
+            cd backend
+            pytest
       - store_artifacts:
           path: test-reports/
           destination: tr1

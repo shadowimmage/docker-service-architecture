@@ -4,12 +4,12 @@ from .settings import * # noqa
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ci',
+        'NAME': 'circle_test',
         # postgres://USER:PASSWORD@HOST:PORT/NAME
         # 'URL': os.environ['TEST_DATABASE_URL']
-        'USER': 'root',
+        'USER': 'postgres',
         'PASSWORD': '',
-        'HOST': 'circle_test',
+        'HOST': 'localhost',
         'PORT': '5432',
     },
 }
