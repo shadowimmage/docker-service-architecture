@@ -2,3 +2,4 @@
 omit =
     backend/wsgi.py
     manage.py
+    .venv
