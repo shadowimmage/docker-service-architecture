@@ -12,6 +12,7 @@ jobs:
     # Subsequent images listed run on a common network with the primary image
       - image: circleci/postgres:9.6.9
         environment:
+          # these settings affect how the test database is going to be set up - use to connect later
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
@@ -42,29 +43,15 @@ jobs:
       - run:
           name: Linting test
           command: |
-<<<<<<< HEAD
-            pwd
-            ls -lah
-            # cd project
-=======
-            cd project
->>>>>>> 78f774bbdd25a63f25f496a8de5ae4863171dd94
             . .venv/bin/activate
             cd backend
-            flake8
+            flake8 --output-file=./test-reports/flake8.txt
       - run:
           name: coverage test
           command: |
-<<<<<<< HEAD
-            pwd
-            ls -lah
-            # cd project
-=======
-            cd project
->>>>>>> 78f774bbdd25a63f25f496a8de5ae4863171dd94
             . .venv/bin/activate
             cd backend
-            pytest
+            pytest --cov --junitxml=./test-reports/pytest
       - store_artifacts:
           path: test-reports/
           destination: tr1
