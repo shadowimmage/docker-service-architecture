@@ -45,13 +45,13 @@ jobs:
           command: |
             . .venv/bin/activate
             cd backend
-            flake8 --output-file=./test-reports/flake8.txt
+            flake8 --output-file=../test-reports/flake8.txt
       - run:
           name: coverage test
           command: |
             . .venv/bin/activate
             cd backend
-            pytest --cov --junitxml=./test-reports/pytest
+            pytest --cov --junitxml=../test-reports/pytest
       - store_artifacts:
           path: test-reports/
           destination: tr1
