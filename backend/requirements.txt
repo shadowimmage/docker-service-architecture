@@ -1,6 +1,9 @@
 Django==2.2.1
 psycopg2==2.8.2
 flake8==3.7
+djangorestframework
+djangorestframework-jwt
+django-filter
 pytest
 pytest-django
 pytest-cov
