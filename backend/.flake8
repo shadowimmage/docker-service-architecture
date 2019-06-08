@@ -4,3 +4,4 @@ exclude =
     .gitignore,
     __pycache__,
     .venv
+    */migrations/*
