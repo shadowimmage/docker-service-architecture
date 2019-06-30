@@ -4,6 +4,9 @@ services:
   db:
     container_name: db
     image: postgres
+    networks:
+      - user-bridge-1
+
   backend:
     container_name: backend
     build: ./backend
@@ -12,21 +15,27 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    networks:
+      - user-bridge-1
     depends_on:
       - db
 
-    frontend:
-      build:
-        context: ./frontend
-      volumes:
-        - ./frontend:/app/frontend:ro
-        - '/app/node_modules'
-      ports:
-        - "8080:8080"
-      networks:
-        - user-bridge-1
-      depends_on:
-        - backend
-        - db
-      environment:
-        - NODE_ENV=development
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app/frontend:ro
+      - '/app/node_modules' # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+    ports:
+      - "8080:8080"
+    networks:
+      - user-bridge-1
+    depends_on:
+      - backend
+      - db
+    environment:
+      - NODE_ENV=development
+
+networks:
+  user-bridge-1:
+    driver: bridge
