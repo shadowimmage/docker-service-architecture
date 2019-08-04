@@ -6,6 +6,8 @@ services:
     image: postgres
     networks:
       - user-bridge-1
+    logging:
+      driver: fluentd
 
   backend:
     container_name: backend
@@ -19,6 +21,8 @@ services:
       - user-bridge-1
     depends_on:
       - db
+    logging:
+      driver: fluentd
 
   frontend:
     build:
@@ -35,6 +39,8 @@ services:
       - db
     environment:
       - NODE_ENV=development
+    logging:
+      driver: fluentd
 
 networks:
   user-bridge-1:
